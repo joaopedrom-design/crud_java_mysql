@@ -7,7 +7,7 @@ public class ModuloConexão {
         //chamar o driver
         String driver = "com.mysql.jdbc.Driver";
         
-        String url ="jdbc:mysql://localhost";
+        String url ="jdbc:mysql://localhost:3306/dblojaetec";
         String user ="root";
         String password ="";
         //fazer a conexão com Banco de Dados
