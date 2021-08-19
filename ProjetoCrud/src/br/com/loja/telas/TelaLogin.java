@@ -16,7 +16,9 @@ public class TelaLogin extends javax.swing.JFrame {
         try {
            pst = conexao.prepareStatement(sql);
            pst.setString(1, txtUsuario.getText()); //admin@gmail.com
-           pst.setString(2, txtSenha.getText()); //12345
+           String captura = new String(txtSenha.getPassword());
+           pst.setString(2, captura);
+          // pst.setString(2, txtSenha.getText()); //12345
            
            rs = pst.executeQuery();
            
@@ -24,6 +26,8 @@ public class TelaLogin extends javax.swing.JFrame {
               //abrir tela principal
               TelaPrincipal principal = new TelaPrincipal();
               principal.setVisible(true);
+              this.dispose();
+              conexao.close();
               
               
               
