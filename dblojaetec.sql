@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 31-Jul-2021 às 19:27
+-- Tempo de geração: 09-Set-2021 às 13:01
 -- Versão do servidor: 10.4.20-MariaDB
 -- versão do PHP: 8.0.8
 
@@ -20,15 +20,11 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `dblojaetec`
 --
-CREATE DATABASE IF NOT EXISTS `dblojaetec` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `dblojaetec`;
 
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `clientes`
---
--- Criação: 31-Jul-2021 às 17:09
 --
 
 CREATE TABLE `clientes` (
@@ -39,16 +35,10 @@ CREATE TABLE `clientes` (
   `emailcli` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- RELACIONAMENTOS PARA TABELAS `clientes`:
---
-
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `ordem_servico`
---
--- Criação: 31-Jul-2021 às 17:09
 --
 
 CREATE TABLE `ordem_servico` (
@@ -62,19 +52,10 @@ CREATE TABLE `ordem_servico` (
   `idcli` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- RELACIONAMENTOS PARA TABELAS `ordem_servico`:
---   `idcli`
---       `clientes` -> `idcli`
---
-
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `usuarios`
---
--- Criação: 31-Jul-2021 às 16:47
--- Última actualização: 31-Jul-2021 às 17:16
 --
 
 CREATE TABLE `usuarios` (
@@ -82,19 +63,18 @@ CREATE TABLE `usuarios` (
   `usuario` varchar(50) NOT NULL,
   `fone` varchar(15) DEFAULT NULL,
   `login` varchar(15) NOT NULL,
-  `senha` varchar(15) NOT NULL
+  `senha` varchar(15) NOT NULL,
+  `perfil` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- RELACIONAMENTOS PARA TABELAS `usuarios`:
---
 
 --
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`iduser`, `usuario`, `fone`, `login`, `senha`) VALUES
-(1, 'admin', '97312-2154', 'admin@gmail.com', '12345');
+INSERT INTO `usuarios` (`iduser`, `usuario`, `fone`, `login`, `senha`, `perfil`) VALUES
+(1, 'John Morais', '1197312-2154', 'John', '12345', 'admin'),
+(2, 'Tom Holand', '1198777-9999', 'Tom', '1234', 'user'),
+(3, 'ANDERSON', '21313545666', 'anderson', '1234', 'Admin');
 
 --
 -- Índices para tabelas despejadas
@@ -140,7 +120,7 @@ ALTER TABLE `ordem_servico`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restrições para despejos de tabelas
