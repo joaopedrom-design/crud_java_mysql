@@ -1,7 +1,7 @@
 package br.com.loja.telas;
 
 import java.sql.*;
-import br.com.loja.dal.ModuloConexão;
+import br.com.loja.dal.ModuloConexao;
 import javax.swing.JOptionPane;
 
 public class TelaLogin extends javax.swing.JFrame {
@@ -23,11 +23,27 @@ public class TelaLogin extends javax.swing.JFrame {
            rs = pst.executeQuery();
            
            if(rs.next()){
+              String perfil = rs.getString(6);
+             // System.out.println("Perfil =>" + perfil);
               //abrir tela principal
-              TelaPrincipal principal = new TelaPrincipal();
-              principal.setVisible(true);
-              this.dispose();
-              conexao.close();
+              
+              if(perfil.equals("admin")){
+                  TelaPrincipal principal = new TelaPrincipal();
+                  principal.setVisible(true);
+                  TelaPrincipal.MenuCadUsuarios.setEnabled(true);
+                  TelaPrincipal.MenuRelatorio.setEnabled(true);
+                  TelaPrincipal.lblUsuario.setText(rs.getString(2));
+                  this.dispose();
+                  conexao.close();  
+              }else{
+                  TelaPrincipal principal = new TelaPrincipal();
+                  principal.setVisible(true);
+                  TelaPrincipal.lblUsuario.setText(rs.getString(2));
+                  
+                  this.dispose();
+                  conexao.close(); 
+              }
+              
               
               
               
@@ -37,23 +53,21 @@ public class TelaLogin extends javax.swing.JFrame {
            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);
-        }
-        
-        
+        }     
     }
     
     public TelaLogin() {
         initComponents();
         
-        conexao = ModuloConexão.conector();
+        conexao = ModuloConexao.conector();
         //System.out.println(conexao);
         
         if(conexao != null){
-          //lblStatus.setText("CONECTADASO     :) ");  
-          lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/br.com.loja.icones/dbok.png"))); 
+         // lblStatus.setText("CONECTADASO     :) ");  
+        lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/loja/icones/dbok.png"))); 
         } else{
-         //lblStatus.setText("NÃO CONECTADASO  :( "); 
-          lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/br.com.loja.icones/dberror.png"))); 
+        // lblStatus.setText("NÃO CONECTADASO  :( "); 
+        lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/loja/icones/dberror.png"))); 
 
         }
         
@@ -104,7 +118,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnLogin)
                         .addGap(59, 59, 59))
@@ -132,8 +146,8 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin)
-                    .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(68, Short.MAX_VALUE))
+                    .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();

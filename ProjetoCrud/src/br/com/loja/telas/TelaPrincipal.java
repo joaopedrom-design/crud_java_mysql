@@ -79,6 +79,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MenuCadastro.add(MenuCadCliente);
 
         MenuCadUsuarios.setText("Usuarios");
+        MenuCadUsuarios.setEnabled(false);
+        MenuCadUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuCadUsuariosActionPerformed(evt);
+            }
+        });
         MenuCadastro.add(MenuCadUsuarios);
 
         MenuCadOS.setText("OS");
@@ -92,6 +98,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Menu.add(MenuCadastro);
 
         MenuRelatorio.setText("Relatório");
+        MenuRelatorio.setEnabled(false);
 
         MenuRelatorioServico.setText("Serviços");
         MenuRelatorio.add(MenuRelatorioServico);
@@ -183,9 +190,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
        
        TelaSobre sobre = new TelaSobre();
        sobre.setVisible(true);
-       this.dispose();
+       Desktop.add(sobre);
         
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void MenuCadUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCadUsuariosActionPerformed
+       
+        TelaUsuarios usuarios = new TelaUsuarios();
+        usuarios.setVisible(true);
+        Desktop.add(usuarios);
+    }//GEN-LAST:event_MenuCadUsuariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,14 +242,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu MenuAjudaSobre;
     private javax.swing.JMenuItem MenuCadCliente;
     private javax.swing.JMenuItem MenuCadOS;
-    private javax.swing.JMenuItem MenuCadUsuarios;
+    public static javax.swing.JMenuItem MenuCadUsuarios;
     private javax.swing.JMenu MenuCadastro;
     private javax.swing.JMenu MenuOpcoes;
     private javax.swing.JMenuItem MenuOpcoesSAir;
-    private javax.swing.JMenu MenuRelatorio;
+    public static javax.swing.JMenu MenuRelatorio;
     private javax.swing.JMenuItem MenuRelatorioServico;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JLabel lblData;
-    private javax.swing.JLabel lblUsuario;
+    public static javax.swing.JLabel lblUsuario;
     // End of variables declaration//GEN-END:variables
 }
