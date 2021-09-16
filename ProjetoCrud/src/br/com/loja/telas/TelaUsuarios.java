@@ -83,6 +83,63 @@ public class TelaUsuarios extends javax.swing.JInternalFrame {
     
     } 
     
+    private void alterar(){
+        String sql ="UPDATE usuarios set usuario=?, fone=?, login=?, senha=?, perfil=? "
+                + "WHERE iduser=? ";
+    
+        try {
+         pst = conexao.prepareStatement(sql);
+         pst.setString(2,txtUsuario.getText());
+         pst.setString(3,txtTelefone.getText());
+         pst.setString(4,txtLogin.getText());
+         String captura = new String(txtSenha.getPassword());
+         pst.setString(5,captura);
+         pst.setString(6,btnEscolha.getSelectedItem().toString());
+         
+         if(txtId.getText().isEmpty() || txtUsuario.getText().isEmpty() || txtTelefone.getText().isEmpty() || txtLogin.getText().isEmpty() || txtSenha.getText().isEmpty()){
+         JOptionPane.showMessageDialog(null,"Preencha todos os campos"); 
+         }
+         else{
+         int adicionado = pst.executeUpdate();
+             if(adicionado > 0){
+                JOptionPane.showMessageDialog(null,"Dados modificados com sucesso");
+                txtId.setText(null);
+                txtUsuario.setText(null);
+                txtTelefone.setText(null);
+                 txtLogin.setText(null);
+                 txtSenha.setText(null);
+                 btnEscolha.setSelectedItem(null);
+             }
+           }         
+        } catch (Exception e) {
+           JOptionPane.showMessageDialog(null,e); 
+        }
+    }
+    
+    private void remover(){
+        int confirma = JOptionPane.showConfirmDialog(null,"Tem certeza?","Atenção",JOptionPane.YES_NO_OPTION);
+        if(confirma == JOptionPane.YES_OPTION){
+            String sql = "DELETE FROM usuarios WHERE iduser=?";
+             try {
+         pst = conexao.prepareStatement(sql);
+         pst.setString(1,txtId.getText());
+         int apagado = pst.executeUpdate();
+            if(apagado > 0){
+             JOptionPane.showMessageDialog(null, "usuario r3emovido com sucesso");
+             
+            }
+             }catch (Exception e) {
+           JOptionPane.showMessageDialog(null,e); 
+            txtId.setText(null);
+            txtUsuario.setText(null);
+            txtTelefone.setText(null);
+            txtLogin.setText(null);
+            txtSenha.setText(null);
+        }
+            
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -146,10 +203,20 @@ public class TelaUsuarios extends javax.swing.JInternalFrame {
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/loja/icones/delete.png"))); // NOI18N
         btnDelete.setToolTipText("Delete");
         btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/loja/icones/update.png"))); // NOI18N
         btnUpdate.setToolTipText("Update");
         btnUpdate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnRead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/loja/icones/read.png"))); // NOI18N
         btnRead.setToolTipText("Read");
@@ -222,12 +289,13 @@ public class TelaUsuarios extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
-                        .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -265,6 +333,14 @@ public class TelaUsuarios extends javax.swing.JInternalFrame {
        adicionar();
         
     }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        alterar();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+       remover();
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

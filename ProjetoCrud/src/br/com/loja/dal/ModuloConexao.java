@@ -5,7 +5,7 @@ public class ModuloConexao {
     public static Connection conector(){
         java.sql.Connection conexao = null;
         //chamar o driver
-        String driver = "com.mysql.jdbc.Driver";
+        String driver = "com.mysql.cj.jdbc.Driver";
         
         String url ="jdbc:mysql://localhost:3306/dblojaetec";
         String user ="root";
