@@ -78,6 +78,31 @@ public class TelaClientes extends javax.swing.JInternalFrame {
            JOptionPane.showMessageDialog(null,e); 
         }
     }
+     
+    private void delete(){
+       int confirma = JOptionPane.showConfirmDialog(null,"Tem certeza?","Atenção",JOptionPane.YES_NO_OPTION);
+        if(confirma == JOptionPane.YES_OPTION){
+            String sql = "DELETE FROM clientes WHERE idcli=?";
+             try {
+         pst = conexao.prepareStatement(sql);
+         pst.setString(1,txtId.getText());
+         int apagado = pst.executeUpdate();
+            if(apagado > 0){
+             JOptionPane.showMessageDialog(null, "usuario removido com sucesso");
+             
+            }
+             }catch (Exception e) {
+           JOptionPane.showMessageDialog(null,e); 
+            txtId.setText(null);
+            txtNomeCli.setText(null);
+            txtEndereço.setText(null);
+            txtFoneCli.setText(null);
+            txtEmail.setText(null);
+        }
+            
+        }  
+        
+    } 
     
     private void pesquisar_clientes(){
         
@@ -193,6 +218,11 @@ public class TelaClientes extends javax.swing.JInternalFrame {
         });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/loja/icones/delete.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("ID:");
 
@@ -319,6 +349,10 @@ public class TelaClientes extends javax.swing.JInternalFrame {
     private void txtBuscaClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaClienteKeyReleased
         pesquisar_clientes();
     }//GEN-LAST:event_txtBuscaClienteKeyReleased
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        delete();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
