@@ -1,12 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package br.com.loja.telas;
 import java.sql.*;
 import br.com.loja.dal.ModuloConexao;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 
 public class TelaUsuarios extends javax.swing.JInternalFrame {
 
@@ -69,12 +67,7 @@ public class TelaUsuarios extends javax.swing.JInternalFrame {
          int adicionado = pst.executeUpdate();
              if(adicionado > 0){
                 JOptionPane.showMessageDialog(null,"Usuario adicionado com sucesso");
-                txtId.setText(null);
-                txtUsuario.setText(null);
-                txtTelefone.setText(null);
-                 txtLogin.setText(null);
-                 txtSenha.setText(null);
-                 btnEscolha.setSelectedItem(null);
+                limpar();
              }
            }         
         } catch (Exception e) {
@@ -103,12 +96,7 @@ public class TelaUsuarios extends javax.swing.JInternalFrame {
          int adicionado = pst.executeUpdate();
              if(adicionado > 0){
                 JOptionPane.showMessageDialog(null,"Dados modificados com sucesso");
-                txtId.setText(null);
-                txtUsuario.setText(null);
-                txtTelefone.setText(null);
-                 txtLogin.setText(null);
-                 txtSenha.setText(null);
-                 btnEscolha.setSelectedItem(null);
+                limpar();
              }
            }         
         } catch (Exception e) {
@@ -130,14 +118,21 @@ public class TelaUsuarios extends javax.swing.JInternalFrame {
             }
              }catch (Exception e) {
            JOptionPane.showMessageDialog(null,e); 
-            txtId.setText(null);
-            txtUsuario.setText(null);
-            txtTelefone.setText(null);
-            txtLogin.setText(null);
-            txtSenha.setText(null);
+            limpar();
         }
             
         }
+        
+     
+    }
+    
+    private void limpar(){
+         txtId.setText(null);
+         txtUsuario.setText(null);
+         txtTelefone.setText(null);
+         txtLogin.setText(null);
+         txtSenha.setText(null);
+         btnEscolha.setSelectedItem(null);
     }
     
     @SuppressWarnings("unchecked")

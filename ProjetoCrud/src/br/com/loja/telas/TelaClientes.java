@@ -2,6 +2,7 @@
 package br.com.loja.telas;
 import java.sql.*;
 import br.com.loja.dal.ModuloConexao;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
@@ -34,10 +35,7 @@ public class TelaClientes extends javax.swing.JInternalFrame {
          int adicionado = pst.executeUpdate();
              if(adicionado > 0){
                 JOptionPane.showMessageDialog(null,"Cliente adicionado com sucesso");
-                txtNomeCli.setText(null);
-                txtEndereço.setText(null);
-                txtFoneCli.setText(null);
-                txtEmail.setText(null);
+                limpar();
                 
                
              }
@@ -66,11 +64,7 @@ public class TelaClientes extends javax.swing.JInternalFrame {
          int adicionado = pst.executeUpdate();
              if(adicionado > 0){
                 JOptionPane.showMessageDialog(null,"Dados modificados com sucesso");
-                txtId.setText(null);
-                txtNomeCli.setText(null);
-                txtEndereço.setText(null);
-                txtFoneCli.setText(null);
-                txtEmail.setText(null);
+                limpar();
                 
              }
            }         
@@ -93,11 +87,7 @@ public class TelaClientes extends javax.swing.JInternalFrame {
             }
              }catch (Exception e) {
            JOptionPane.showMessageDialog(null,e); 
-            txtId.setText(null);
-            txtNomeCli.setText(null);
-            txtEndereço.setText(null);
-            txtFoneCli.setText(null);
-            txtEmail.setText(null);
+            limpar();
         }
             
         }  
@@ -106,7 +96,7 @@ public class TelaClientes extends javax.swing.JInternalFrame {
     
     private void pesquisar_clientes(){
         
-       String sql = "SELECT * FROM clientes WHERE nomecli LIKE ?";
+       String sql = "SELECT idcli as ID, nomecli as NOME, endcli as ENDEREÇO, fonecli as FONE, emailcli as EMAIL FROM `clientes` WHERE nomecli LIKE ?";
        
         try {
          pst = conexao.prepareStatement(sql);
@@ -126,6 +116,15 @@ public class TelaClientes extends javax.swing.JInternalFrame {
         txtEndereço.setText(tblClientes.getModel().getValueAt(setar,2).toString());
         txtFoneCli.setText(tblClientes.getModel().getValueAt(setar,3).toString());
         txtEmail.setText(tblClientes.getModel().getValueAt(setar,4).toString());
+    }
+    
+    private void limpar(){
+            txtId.setText(null);
+            txtNomeCli.setText(null);
+            txtEndereço.setText(null);
+            txtFoneCli.setText(null);
+            txtEmail.setText(null);
+            ((DefaultTableModel)tblClientes.getModel()).setRowCount(0);
     }
 
     /**
@@ -182,13 +181,13 @@ public class TelaClientes extends javax.swing.JInternalFrame {
 
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "NOME", "ENDEREÇO", "FONE", "EMAIL"
             }
         ));
         tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -273,9 +272,10 @@ public class TelaClientes extends javax.swing.JInternalFrame {
                                 .addComponent(btnAdicionar)
                                 .addGap(35, 35, 35)
                                 .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(98, 98, 98)
-                                .addComponent(jButton3)))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3)
+                                .addGap(54, 54, 54)))))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -287,7 +287,7 @@ public class TelaClientes extends javax.swing.JInternalFrame {
                     .addComponent(lblSearch))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
