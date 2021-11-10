@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 21-Out-2021 às 13:55
+-- Tempo de geração: 04-Nov-2021 às 12:58
 -- Versão do servidor: 10.4.20-MariaDB
--- versão do PHP: 8.0.8
+-- versão do PHP: 8.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `dblojaetec`
 --
+CREATE DATABASE IF NOT EXISTS `dblojaetec` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `dblojaetec`;
 
 -- --------------------------------------------------------
 
@@ -39,8 +41,10 @@ CREATE TABLE `clientes` (
 -- Extraindo dados da tabela `clientes`
 --
 
-INSERT INTO `clientes` (`idcli`, `nomecli`, `endcli`, `fonecli`, `emailcli`) VALUES
-(1, 'Fulano SIlva', 'Rua. Pedro Vai de Caminha, 7', '2316516165', 'fulanosilva@gmail.com');
+INSERT INTO `clientes` VALUES
+(1, 'Fulano SIlva', 'Rua. Pedro Vai de Caminha, 7', '2316516165', 'fulanosilva@gmail.com'),
+(2, 'Antonio Esterco', 'Rua. Vingadores', '316136131154', 'Antonio.esterco@gmail.com'),
+(3, 'Bernado Campos', 'Rua Campinhos', '313156513156', 'bercampinhos@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -78,7 +82,7 @@ CREATE TABLE `usuarios` (
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`iduser`, `usuario`, `fone`, `login`, `senha`, `perfil`) VALUES
+INSERT INTO `usuarios` VALUES
 (1, 'John Morais', '1197312-2154', 'John', '12345', 'admin'),
 (2, 'Tom Holand', '1198777-9999', 'Tom', '1234', 'user'),
 (3, 'ANDERSON', '21313545666', 'anderson', '1234', 'Admin');
@@ -115,7 +119,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `idcli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idcli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `ordem_servico`
