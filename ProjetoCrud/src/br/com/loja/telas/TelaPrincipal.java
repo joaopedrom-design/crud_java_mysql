@@ -167,7 +167,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuCadClienteActionPerformed
 
     private void MenuCadOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCadOSActionPerformed
-        // TODO add your handling code here:
+        TelaOs os = new TelaOs();
+        os.setVisible(true);
+        Desktop.add(os);
     }//GEN-LAST:event_MenuCadOSActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
