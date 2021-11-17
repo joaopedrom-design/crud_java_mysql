@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04-Nov-2021 às 12:58
+-- Tempo de geração: 16-Nov-2021 às 16:13
 -- Versão do servidor: 10.4.20-MariaDB
 -- versão do PHP: 8.0.9
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `dblojaetec`
 --
-CREATE DATABASE IF NOT EXISTS `dblojaetec` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `dblojaetec`;
 
 -- --------------------------------------------------------
 
@@ -41,7 +39,7 @@ CREATE TABLE `clientes` (
 -- Extraindo dados da tabela `clientes`
 --
 
-INSERT INTO `clientes` VALUES
+INSERT INTO `clientes` (`idcli`, `nomecli`, `endcli`, `fonecli`, `emailcli`) VALUES
 (1, 'Fulano SIlva', 'Rua. Pedro Vai de Caminha, 7', '2316516165', 'fulanosilva@gmail.com'),
 (2, 'Antonio Esterco', 'Rua. Vingadores', '316136131154', 'Antonio.esterco@gmail.com'),
 (3, 'Bernado Campos', 'Rua Campinhos', '313156513156', 'bercampinhos@gmail.com');
@@ -55,11 +53,13 @@ INSERT INTO `clientes` VALUES
 CREATE TABLE `ordem_servico` (
   `os` int(11) NOT NULL,
   `data_os` timestamp NOT NULL DEFAULT current_timestamp(),
+  `tipo` int(11) NOT NULL,
+  `situacao` int(11) NOT NULL,
   `equipamento` varchar(100) NOT NULL,
   `defeito` varchar(150) NOT NULL,
-  `servico` varchar(150) DEFAULT NULL,
-  `tecnico` varchar(30) DEFAULT NULL,
-  `valor` decimal(10,2) DEFAULT NULL,
+  `servico` varchar(150) NOT NULL,
+  `tecnico` varchar(30) NOT NULL,
+  `valor` decimal(10,2) NOT NULL,
   `idcli` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -82,7 +82,7 @@ CREATE TABLE `usuarios` (
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` VALUES
+INSERT INTO `usuarios` (`iduser`, `usuario`, `fone`, `login`, `senha`, `perfil`) VALUES
 (1, 'John Morais', '1197312-2154', 'John', '12345', 'admin'),
 (2, 'Tom Holand', '1198777-9999', 'Tom', '1234', 'user'),
 (3, 'ANDERSON', '21313545666', 'anderson', '1234', 'Admin');
